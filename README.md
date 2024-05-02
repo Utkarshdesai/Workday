@@ -12,15 +12,17 @@ Before you begin, ensure you have Node.js and npm installed on your machine. You
 
 1. Clone this repository to your local machine:
 
-   ```bash
+  
    git clone <repository-url>
 
 ## Navigate to the project directory:   
-
+  
 cd 'job portal' 
 
-## Install dependencies using npm: 
+## Install dependencies using npm:
+    ```bash 
 npm install 
 
 ## In the project directory, you can run the following commands:
+  ```bash
 npm run dev
