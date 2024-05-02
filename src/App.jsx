@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import JobCard from './component/JobCard'
+import Category from './component/Category'
+import Job from './component/Job'
 
 function App() {
 
   const [jobdata , setjobdata] = useState([])
   const [loading , setloading] = useState(false)
+ 
   
+  // Get data from API
   useEffect( () => {
    
     const myHeaders = new Headers();
@@ -17,19 +20,15 @@ function App() {
     headers: myHeaders,
     };
 
-
+  
    const fetchjobdata = async() => {
     
+    // used try catch for error handling 
      try {
       
        setloading(true)
       const data = await fetch ("https://api.weekday.technology/adhoc/getSampleJdJSON", requestOptions)
       const res  = await data.json()
-      
-      console.log(res)
-
-      //console.log(data.json());
-      //console.log(data.jdList)
       setjobdata(res.jdList)
       setloading(false)
       
@@ -49,21 +48,31 @@ function App() {
 
   return (
     <>
+     
+     <Category />
 
-     {
-       loading ? 
-        <p> Loading ....</p> 
+    {/* handle loading state */}
+      {
+       loading 
+       
+       ? 
+         <p> Loading ....</p> 
        : 
        
-       ( <div className='grid xs:gridcols-1 sm:grid-cols-2 md:grid-cols-3 p-2 mx-auto space-y-10 space-x-5 mb-2 '> 
-         {
-           jobdata?.map( (item) => <JobCard  key ={item.jdUid} item={item}/>)
-         }  
+       ( 
+       
+       <div> 
+          {
+              <Job 
+              jobdata = {jobdata}  
+              setjobdata = {setjobdata}
+              />
+          } 
+
        </div>)
      }
     
-     
-    
+        
    
     </>
   )
